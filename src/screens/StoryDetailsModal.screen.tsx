@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, ScrollView, Text } from 'react-native';
 
 import { useQuery } from 'urql';
-import { HomeStackParamList } from '~src/types';
+import { RootStackParamList } from '~src/types';
 
 const Story = `
   query getStory($id: Int!) {
@@ -17,8 +17,8 @@ const Story = `
   }
 `;
 
-export const StoryDetails: React.FC<{
-  route: RouteProp<HomeStackParamList, 'StoryDetails'>;
+export const StoryDetailsModal: React.FC<{
+  route: RouteProp<RootStackParamList, 'StoryDetailsModal'>;
 }> = ({ route }) => {
   console.log(route);
   const [result] = useQuery({

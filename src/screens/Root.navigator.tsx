@@ -5,7 +5,7 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 import { RootStackParamList } from '~src/types';
-import { ExampleModal } from './ExampleModal.screen';
+import { StoryDetailsModal } from './StoryDetailsModal.screen';
 import { BottomTabsNavigator } from './BottomTabs.navigator';
 import { StackNavigationOptions } from '@react-navigation/stack';
 
@@ -19,6 +19,7 @@ const modalScreenOptions: Partial<StackNavigationOptions> = {
     ios: CardStyleInterpolators.forModalPresentationIOS,
     android: CardStyleInterpolators.forRevealFromBottomAndroid,
   }),
+  headerBackTitleVisible: false,
 };
 
 export const RootNavigator: React.FC = () => {
@@ -30,9 +31,12 @@ export const RootNavigator: React.FC = () => {
         options={{ headerShown: false }}
       />
       <RootStack.Screen
-        name="ExampleModal"
-        component={ExampleModal}
-        options={modalScreenOptions}
+        name="StoryDetailsModal"
+        component={StoryDetailsModal}
+        options={({ route }) => ({
+          ...modalScreenOptions,
+          title: route.params.title,
+        })}
       />
     </RootStack.Navigator>
   );

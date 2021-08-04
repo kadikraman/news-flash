@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View, FlatList } from 'react-native';
 import { useQuery } from 'urql';
-import { useHomeNavigation } from '~src/hooks/useTypedNavigation';
+import { useRootNavigation } from '~src/hooks/useTypedNavigation';
 
 const StoriesQuery = `
   query getStories {
@@ -14,12 +14,12 @@ const StoriesQuery = `
   }
 `;
 
-export const Stories = () => {
+export const HomeTab = () => {
   const [result] = useQuery({
     query: StoriesQuery,
   });
 
-  const navigation = useHomeNavigation();
+  const navigation = useRootNavigation();
 
   if (result.fetching) {
     return <Text>Loading...</Text>;
@@ -40,7 +40,7 @@ export const Stories = () => {
           <Pressable
             style={styles.readMore}
             onPress={() =>
-              navigation.navigate('StoryDetails', {
+              navigation.navigate('StoryDetailsModal', {
                 id: item.id,
                 title: item.title,
               })

@@ -33,3 +33,21 @@ yarn android
 Note if this if your first time running an Android project, you'll need to register an emulator in Android Studio first. This can be done by opening Android studio, and on the launch page choose Configure -> AVD.
 
 You can also run the app directly from Android Studio by opening the project in Android Studio and clicking on the play icon.
+
+## Course
+
+### Initialise new project
+
+Use the RN template <https://github.com/kadikraman/react-native-template>
+
+## Set up urql client
+<https://formidable.com/open-source/urql/docs/basics/react-preact/>
+
+## Fetch home page data from Hasura
+<https://cloud.hasura.io/project/bfe70d48-19db-4f66-a99d-58df4a0c25ff/console>
+
+## Fetch read more data from Hasura
+
+## Pull to refresh
+
+## Get the schema for typed  gql

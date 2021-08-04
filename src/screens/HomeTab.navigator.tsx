@@ -10,7 +10,11 @@ const HomeStack = createStackNavigator<HomeStackParamList>();
 export const HomeTabNavigator: React.FC = () => {
   return (
     <HomeStack.Navigator initialRouteName="FirstPage">
-      <HomeStack.Screen name="FirstPage" component={HomeTabFirstPage} />
+      <HomeStack.Screen
+        name="FirstPage"
+        component={HomeTabFirstPage}
+        options={{ title: 'Latest News' }}
+      />
       <HomeStack.Screen name="SecondPage" component={HomeTabSecondPage} />
     </HomeStack.Navigator>
   );

@@ -1,21 +1,25 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeTabFirstPage } from './HomeTabFirstPage.screen';
-import { HomeTabSecondPage } from './HomeTabSecondPage.screen';
+import { Stories } from './Stories.screen';
+import { StoryDetails } from './StoryDetails.screen';
 import { HomeStackParamList } from '~src/types';
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
 export const HomeTabNavigator: React.FC = () => {
   return (
-    <HomeStack.Navigator initialRouteName="FirstPage">
+    <HomeStack.Navigator initialRouteName="Stories">
       <HomeStack.Screen
-        name="FirstPage"
-        component={HomeTabFirstPage}
+        name="Stories"
+        component={Stories}
         options={{ title: 'Latest News' }}
       />
-      <HomeStack.Screen name="SecondPage" component={HomeTabSecondPage} />
+      <HomeStack.Screen
+        name="StoryDetails"
+        component={StoryDetails}
+        options={({ route }) => ({ title: route.params.title })}
+      />
     </HomeStack.Navigator>
   );
 };

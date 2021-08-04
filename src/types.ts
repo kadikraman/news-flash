@@ -11,6 +11,9 @@ export type BottomTabsParamList = {
 };
 
 export type HomeStackParamList = {
-  FirstPage: undefined;
-  SecondPage: undefined;
+  Stories: undefined;
+  StoryDetails: {
+    id: string;
+    title: string;
+  };
 };

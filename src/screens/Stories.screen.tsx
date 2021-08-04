@@ -1,10 +1,10 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View, FlatList } from 'react-native';
 import { useQuery } from 'urql';
-import { FlatList } from 'react-native-gesture-handler';
+import { useHomeNavigation } from '~src/hooks/useTypedNavigation';
 
 const StoriesQuery = `
-  query {
+  query getStories {
     stories {
       id
       title
@@ -14,10 +14,12 @@ const StoriesQuery = `
   }
 `;
 
-export const HomeTabFirstPage = () => {
+export const Stories = () => {
   const [result] = useQuery({
     query: StoriesQuery,
   });
+
+  const navigation = useHomeNavigation();
 
   if (result.fetching) {
     return <Text>Loading...</Text>;
@@ -35,7 +37,14 @@ export const HomeTabFirstPage = () => {
         <View>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.summary}>{item.summary}</Text>
-          <Pressable style={styles.readMore}>
+          <Pressable
+            style={styles.readMore}
+            onPress={() =>
+              navigation.navigate('StoryDetails', {
+                id: item.id,
+                title: item.title,
+              })
+            }>
             <Text style={styles.readMoreText}>Read More</Text>
           </Pressable>
         </View>

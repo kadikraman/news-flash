@@ -80,3 +80,9 @@ query MyQuery {
 - use react-native-safe-area-context to set the insets
 - <https://github.com/react-native-netinfo/react-native-netinfo#netinfostate>
 - use `isInternetReachable` instead of `isConnected`
+
+## Animate the "you are offline" message using Reanimated 2
+
+- <https://docs.swmansion.com/react-native-reanimated/docs/next/animations/>
+- yarn add react-native-reanimated@next
+- add the babel plugin 'react-native-reanimated/plugin', - this has to be listed LAST

@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-export const OtherTab: React.FC = () => {
+export const BookmarkTab: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text>Other Bottom Tab</Text>
+      <Text>Bookmark Tab</Text>
     </View>
   );
 };

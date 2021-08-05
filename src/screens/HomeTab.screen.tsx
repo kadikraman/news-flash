@@ -104,6 +104,6 @@ const styles = StyleSheet.create({
   readMoreText: {
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    color: '#6F2DBD',
+    color: '#D81E5B',
   },
 });

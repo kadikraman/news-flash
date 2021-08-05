@@ -10,5 +10,5 @@ export type RootStackParamList = {
 
 export type BottomTabsParamList = {
   HomeTab: undefined;
-  OtherTab: undefined;
+  BookmarkTab: undefined;
 };

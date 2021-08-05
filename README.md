@@ -86,3 +86,12 @@ query MyQuery {
 - <https://docs.swmansion.com/react-native-reanimated/docs/next/animations/>
 - yarn add react-native-reanimated@next
 - add the babel plugin 'react-native-reanimated/plugin', - this has to be listed LAST
+
+## Adding bottom tab icons
+
+- get the assets from Adobe stock
+- run them through <https://react-svgr.com/playground/?expandProps=none&native=true&typescript=true>-
+
+## Show a count in bottom tab
+
+- use the tabBarBadge to show a count of bookmarked articles

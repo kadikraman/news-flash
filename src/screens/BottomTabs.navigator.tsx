@@ -33,7 +33,15 @@ export const BottomTabsNavigator: React.FC = () => {
       <BottomTabs.Screen
         name="BookmarkTab"
         component={BookmarkTab}
-        options={{ title: 'My Bookmarks' }}
+        options={{
+          title: 'My Bookmarks',
+          tabBarBadge: 3,
+          tabBarBadgeStyle: {
+            backgroundColor: '#4B88A2',
+            fontSize: 12,
+            fontWeight: 'bold',
+          },
+        }}
       />
     </BottomTabs.Navigator>
   );

@@ -41,13 +41,34 @@ You can also run the app directly from Android Studio by opening the project in 
 Use the RN template <https://github.com/kadikraman/react-native-template>
 
 ## Set up urql client
+
 <https://formidable.com/open-source/urql/docs/basics/react-preact/>
 
 ## Fetch home page data from Hasura
+
 <https://cloud.hasura.io/project/bfe70d48-19db-4f66-a99d-58df4a0c25ff/console>
 
 ## Fetch read more data from Hasura
 
 ## Pull to refresh
+Note that requestPolicy: 'network-only' is important (otherwise will fetch from cache instread)
 
 ## Get the schema for typed  gql
+
+## Pagination
+
+Paginate the stories list
+
+```js
+query MyQuery {
+  stories_aggregate {
+    aggregate {
+      count
+    }
+    nodes {
+      id
+      title
+    }
+  }
+}
+```

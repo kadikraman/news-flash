@@ -1,5 +1,12 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View, FlatList } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 import { useQuery } from 'urql';
 import { useRootNavigation } from '~src/hooks/useTypedNavigation';
 
@@ -15,13 +22,25 @@ const StoriesQuery = `
 `;
 
 export const HomeTab = () => {
-  const [result] = useQuery({
+  const [isRefreshing, setIsRefreshing] = React.useState(false);
+  const [result, refreshStories] = useQuery({
     query: StoriesQuery,
   });
 
   const navigation = useRootNavigation();
 
-  if (result.fetching) {
+  const onRefresh = React.useCallback(() => {
+    setIsRefreshing(true);
+    refreshStories({ requestPolicy: 'network-only' });
+  }, [refreshStories]);
+
+  React.useEffect(() => {
+    if (!result.fetching) {
+      setIsRefreshing(false);
+    }
+  }, [result.fetching]);
+
+  if (result.fetching && !isRefreshing) {
     return <Text>Loading...</Text>;
   }
 
@@ -31,6 +50,10 @@ export const HomeTab = () => {
 
   return (
     <FlatList
+      refreshing={isRefreshing}
+      refreshControl={
+        <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+      }
       contentContainerStyle={styles.container}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       renderItem={({ item }) => (

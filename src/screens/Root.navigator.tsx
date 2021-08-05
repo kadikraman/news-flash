@@ -8,6 +8,7 @@ import { RootStackParamList } from '~src/types';
 import { StoryDetailsModal } from './StoryDetailsModal.screen';
 import { BottomTabsNavigator } from './BottomTabs.navigator';
 import { StackNavigationOptions } from '@react-navigation/stack';
+import { OfflineMessage } from '~src/components/OfflineMessage';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -24,20 +25,23 @@ const modalScreenOptions: Partial<StackNavigationOptions> = {
 
 export const RootNavigator: React.FC = () => {
   return (
-    <RootStack.Navigator initialRouteName="BottomTabs">
-      <RootStack.Screen
-        name="BottomTabs"
-        component={BottomTabsNavigator}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen
-        name="StoryDetailsModal"
-        component={StoryDetailsModal}
-        options={({ route }) => ({
-          ...modalScreenOptions,
-          title: route.params.title,
-        })}
-      />
-    </RootStack.Navigator>
+    <>
+      <RootStack.Navigator initialRouteName="BottomTabs">
+        <RootStack.Screen
+          name="BottomTabs"
+          component={BottomTabsNavigator}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name="StoryDetailsModal"
+          component={StoryDetailsModal}
+          options={({ route }) => ({
+            ...modalScreenOptions,
+            title: route.params.title,
+          })}
+        />
+      </RootStack.Navigator>
+      <OfflineMessage />
+    </>
   );
 };

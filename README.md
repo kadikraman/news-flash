@@ -51,6 +51,7 @@ Use the RN template <https://github.com/kadikraman/react-native-template>
 ## Fetch read more data from Hasura
 
 ## Pull to refresh
+
 Note that requestPolicy: 'network-only' is important (otherwise will fetch from cache instread)
 
 ## Get the schema for typed  gql
@@ -72,3 +73,10 @@ query MyQuery {
   }
 }
 ```
+
+## Show a "you are offline" message
+
+- Spotify-style notification at the bottom of the screen
+- use react-native-safe-area-context to set the insets
+- <https://github.com/react-native-netinfo/react-native-netinfo#netinfostate>
+- use `isInternetReachable` instead of `isConnected`

@@ -84,12 +84,16 @@ export const HomeTab = () => {
   }, [refreshStories]);
 
   const onLoadMore = React.useCallback(() => {
-    if (isLoadingMore) {
+    if (
+      isLoadingMore ||
+      offset > result?.data?.stories_aggregate?.aggregate.count
+    ) {
       return;
     }
+
     setIsLoadingMore(true);
     setOffset(val => val + PAGE_SIZE);
-  }, [refreshStories, isLoadingMore]);
+  }, [refreshStories, isLoadingMore, offset]);
 
   React.useEffect(() => {
     setOffset(0);

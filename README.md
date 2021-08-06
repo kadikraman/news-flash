@@ -40,6 +40,10 @@ You can also run the app directly from Android Studio by opening the project in 
 
 Use the RN template <https://github.com/kadikraman/react-native-template>
 
+## Set up the graphql schema in Hasura
+
+- create a stories table
+
 ## Set up urql client
 
 <https://formidable.com/open-source/urql/docs/basics/react-preact/>

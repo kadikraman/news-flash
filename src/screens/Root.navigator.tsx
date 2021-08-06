@@ -9,6 +9,10 @@ import { StoryDetailsModal } from './StoryDetailsModal.screen';
 import { BottomTabsNavigator } from './BottomTabs.navigator';
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { OfflineMessage } from '~src/components/OfflineMessage';
+import { DefaultTheme } from '@react-navigation/native';
+
+const navTheme = DefaultTheme;
+navTheme.colors.background = '#333138';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 

@@ -8,6 +8,7 @@ import {
   FlatList,
   RefreshControl,
   ActivityIndicator,
+  StatusBar,
 } from 'react-native';
 import { useQuery, UseQueryState } from 'urql';
 import { useRootNavigation } from '~src/hooks/useTypedNavigation';
@@ -115,40 +116,46 @@ export const HomeTab = () => {
   }
 
   return (
-    <FlatList
-      refreshing={isRefreshing}
-      refreshControl={
-        <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
-      }
-      contentContainerStyle={styles.container}
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
-      renderItem={({ item }) => (
-        <View>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.summary}>{item.summary}</Text>
-          <Pressable
-            style={styles.readMore}
-            onPress={() =>
-              navigation.navigate('StoryDetailsModal', {
-                id: item.id,
-                title: item.title,
-              })
-            }>
-            <Text style={styles.readMoreText}>Read More</Text>
-          </Pressable>
-        </View>
-      )}
-      onEndReachedThreshold={0.5}
-      onEndReached={onLoadMore}
-      ListFooterComponent={() => (isLoadingMore ? <ActivityIndicator /> : null)}
-      data={stories}
-    />
+    <>
+      <StatusBar barStyle="light-content" />
+      <FlatList
+        refreshing={isRefreshing}
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        }
+        contentContainerStyle={styles.container}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        renderItem={({ item }) => (
+          <View>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.summary}>{item.summary}</Text>
+            <Pressable
+              style={styles.readMore}
+              onPress={() =>
+                navigation.navigate('StoryDetailsModal', {
+                  id: item.id,
+                  title: item.title,
+                })
+              }>
+              <Text style={styles.readMoreText}>Read More</Text>
+            </Pressable>
+          </View>
+        )}
+        onEndReachedThreshold={0.5}
+        onEndReached={onLoadMore}
+        ListFooterComponent={() =>
+          isLoadingMore ? <ActivityIndicator /> : null
+        }
+        data={stories}
+      />
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    backgroundColor: '#000103',
   },
   title: {
     fontSize: 24,
@@ -156,14 +163,15 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 2,
     marginBottom: 10,
+    color: '#fff',
   },
   summary: {
     fontSize: 18,
-    color: 'grey',
+    color: 'lightgrey',
   },
   separator: {
     height: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     marginVertical: 40,
   },
   readMore: {

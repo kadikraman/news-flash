@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabsParamList } from '~src/types';
 import { HomeTab } from './HomeTab.screen';
@@ -11,6 +12,13 @@ export const BottomTabsNavigator: React.FC = () => {
   return (
     <BottomTabs.Navigator
       screenOptions={({ route }) => ({
+        headerTintColor: '#fff',
+        headerBackgroundContainerStyle: {
+          backgroundColor: '#333138',
+        },
+        tabBarBackground: () => <View style={{ backgroundColor: '#333138' }} />,
+        tabBarActiveBackgroundColor: '#333138',
+        tabBarInactiveBackgroundColor: '#333138',
         tabBarActiveTintColor: '#D81E5B',
         tabBarInactiveTintColor: '#D3D4D9',
         tabBarShowLabel: false,
@@ -28,7 +36,12 @@ export const BottomTabsNavigator: React.FC = () => {
       <BottomTabs.Screen
         name="HomeTab"
         component={HomeTab}
-        options={{ title: 'Latest Stories' }}
+        options={{
+          title: 'Latest Stories',
+          headerBackground: () => (
+            <View style={{ backgroundColor: '#333138' }} />
+          ),
+        }}
       />
       <BottomTabs.Screen
         name="BookmarkTab"

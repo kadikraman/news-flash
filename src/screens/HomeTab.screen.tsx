@@ -59,7 +59,7 @@ type Story = {
   author: string;
 };
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 4;
 
 export const HomeTab = () => {
   const [isRefreshing, setIsRefreshing] = React.useState(false);
@@ -134,15 +134,9 @@ export const HomeTab = () => {
           </Pressable>
         </View>
       )}
-      ListFooterComponent={() =>
-        isLoadingMore ? (
-          <ActivityIndicator />
-        ) : (
-          <Pressable onPress={onLoadMore} style={{ alignSelf: 'center' }}>
-            <Text>Load More</Text>
-          </Pressable>
-        )
-      }
+      onEndReachedThreshold={0.5}
+      onEndReached={onLoadMore}
+      ListFooterComponent={() => (isLoadingMore ? <ActivityIndicator /> : null)}
       data={stories}
     />
   );

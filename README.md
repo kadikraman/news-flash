@@ -59,7 +59,9 @@ Note that requestPolicy: 'network-only' is important (otherwise will fetch from 
 
 ## Pagination
 
-Paginate the stories list
+Paginate the stories list. Need to use a helper hook to add the results.
+
+Question! Had to add a setOffset(0) on mount because of hot reloading
 
 ```js
 query MyQuery {

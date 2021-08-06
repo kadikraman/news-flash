@@ -52,6 +52,7 @@ Use the RN template <https://github.com/kadikraman/react-native-template>
 
 ## Pull to refresh
 
+Do pagination first and pull to refresh after.
 Note that requestPolicy: 'network-only' is important (otherwise will fetch from cache instread)
 
 ## Get the schema for typed  gql

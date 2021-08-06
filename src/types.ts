@@ -3,7 +3,7 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 export type RootStackParamList = {
   BottomTabs: NavigatorScreenParams<BottomTabsParamList>;
   StoryDetailsModal: {
-    id: string;
+    id: number;
     title: string;
   };
 };

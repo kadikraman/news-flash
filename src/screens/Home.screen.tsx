@@ -5,8 +5,12 @@ import {
   StyleSheet,
   ActivityIndicator,
   FlatList,
+  Pressable,
 } from 'react-native';
 import { gql, useQuery } from 'urql';
+import { useNavigation } from '@react-navigation/core';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types';
 
 const STORIES_QUERY = gql`
   query AllStories {
@@ -20,6 +24,8 @@ const STORIES_QUERY = gql`
 `;
 
 export const HomeScreen: React.FC = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [{ data, error, fetching }] = useQuery({ query: STORIES_QUERY });
 
   if (fetching) {
@@ -46,10 +52,10 @@ export const HomeScreen: React.FC = () => {
       keyExtractor={item => item.id}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       renderItem={({ item }) => (
-        <View>
+        <Pressable onPress={() => navigation.navigate('StoryDetailsModal')}>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.summary}>{item.summary}</Text>
-        </View>
+        </Pressable>
       )}
     />
   );

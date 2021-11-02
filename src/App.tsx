@@ -2,7 +2,7 @@ import React from 'react';
 import { createClient, Provider as UrqlProvider } from 'urql';
 import { StatusBar, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { BottomTabNavigator } from './screens/BottomTabs.navigator';
+import { RootNavigator } from './screens/Root.navigator';
 
 const client = createClient({
   url:
@@ -16,7 +16,7 @@ export const App: React.FC = () => {
     <UrqlProvider value={client}>
       <NavigationContainer>
         <StatusBar hidden />
-        <BottomTabNavigator />
+        <RootNavigator />
       </NavigationContainer>
     </UrqlProvider>
   );

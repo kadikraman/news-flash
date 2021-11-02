@@ -17,7 +17,6 @@ const STORIES_QUERY = gql`
     stories {
       id
       title
-      author
       summary
     }
   }
@@ -52,7 +51,13 @@ export const HomeScreen: React.FC = () => {
       keyExtractor={item => item.id}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       renderItem={({ item }) => (
-        <Pressable onPress={() => navigation.navigate('StoryDetailsModal')}>
+        <Pressable
+          onPress={() =>
+            navigation.navigate('StoryDetailsModal', {
+              id: item.id,
+              title: item.title,
+            })
+          }>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.summary}>{item.summary}</Text>
         </Pressable>

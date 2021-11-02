@@ -17,7 +17,10 @@ export const RootNavigator: React.FC = () => {
       <RootStack.Screen
         name="StoryDetailsModal"
         component={StoryDetailsModal}
-        options={{ presentation: 'modal' }}
+        options={({ route }) => ({
+          presentation: 'modal',
+          title: route.params.title,
+        })}
       />
     </RootStack.Navigator>
   );

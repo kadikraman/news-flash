@@ -19,7 +19,7 @@ const STORIES_QUERY = gql`
   }
 `;
 
-export const Stories: React.FC = () => {
+export const HomeScreen: React.FC = () => {
   const [{ data, error, fetching }] = useQuery({ query: STORIES_QUERY });
 
   if (fetching) {
@@ -65,8 +65,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   flatListContainer: {
-    paddingTop: 100, // temporary
-    paddingBottom: 20,
+    paddingVertical: 20,
   },
   title: {
     fontSize: 24,

@@ -11,6 +11,10 @@ import { gql, useQuery } from 'urql';
 import { useNavigation } from '@react-navigation/core';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
+import {
+  AllStoriesQuery,
+  AllStoriesQueryVariables,
+} from '../graphql/__generated__/operationTypes';
 
 const STORIES_QUERY = gql`
   query AllStories {
@@ -25,7 +29,10 @@ const STORIES_QUERY = gql`
 export const HomeScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [{ data, error, fetching }] = useQuery({ query: STORIES_QUERY });
+  const [{ data, error, fetching }] = useQuery<
+    AllStoriesQuery,
+    AllStoriesQueryVariables
+  >({ query: STORIES_QUERY });
 
   if (fetching) {
     return (
@@ -47,7 +54,7 @@ export const HomeScreen: React.FC = () => {
     <FlatList
       contentContainerStyle={styles.flatListContainer}
       style={styles.flatList}
-      data={data.stories}
+      data={data?.stories}
       keyExtractor={item => item.id}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       renderItem={({ item }) => (

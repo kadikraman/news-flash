@@ -7,7 +7,11 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "yarn lint --fix",
+    "generate:gql:schema": "yarn graphql-codegen --config ./codegen.schema.yml",
+    "generate:gql:types": "yarn graphql-codegen --config ./codegen.types.yml && yarn lint:fix",
+    "postinstall": "yarn generate:gql:types"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.0.9",
@@ -23,6 +27,10 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
+    "@graphql-codegen/cli": "^2.2.2",
+    "@graphql-codegen/introspection": "^2.1.0",
+    "@graphql-codegen/typescript": "^2.3.0",
+    "@graphql-codegen/typescript-operations": "^2.2.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.65.0",

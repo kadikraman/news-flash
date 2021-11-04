@@ -17,6 +17,7 @@
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "@urql/exchange-graphcache": "^4.3.5",
     "graphql": "^16.0.0",
     "react": "17.0.2",
     "react-native": "0.66.1",

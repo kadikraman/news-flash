@@ -1943,12 +1943,20 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
-"@urql/core@^2.3.2":
+"@urql/core@>=2.3.3", "@urql/core@^2.3.2":
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/@urql/core/-/core-2.3.4.tgz#4eb00d6b2c631b031e4ad235fcce1a11ceb09ecd"
   integrity sha512-KXeR55ONqkTZ2gwNgyFGJEGRp1/jEnyqkFjEguknnG6GFaikAwAX0TMijKcX6ZQ4qE59cDtVEtSbqpVkd9XNmA==
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.0"
+    wonka "^4.0.14"
+
+"@urql/exchange-graphcache@^4.3.5":
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/@urql/exchange-graphcache/-/exchange-graphcache-4.3.5.tgz#27727cd1c5ba5d23c98aa43eea86c609e81afc2a"
+  integrity sha512-q5/CzNtSxd5fW/YZ94KABmtQ34XliyS+KKKhyJ+/y66D7mYrN/ZEiuKTlnB7FTt9GLZ0yRtgIfXjwoGicB/Tlw==
+  dependencies:
+    "@urql/core" ">=2.3.3"
     wonka "^4.0.14"
 
 abab@^2.0.3, abab@^2.0.5:

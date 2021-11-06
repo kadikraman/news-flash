@@ -67,7 +67,7 @@ export const HomeScreen: React.FC = () => {
       data={data?.stories}
       keyExtractor={item => item.id}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
-      renderItem={({ item }) => <Story item={item} />}
+      renderItem={({ item }) => <Story item={item} cta="add" />}
     />
   );
 };

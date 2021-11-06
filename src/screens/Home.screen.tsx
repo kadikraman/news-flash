@@ -25,12 +25,24 @@ const STORIES_QUERY = gql`
 `;
 
 export const HomeScreen: React.FC = () => {
-  const [{ data, error, fetching }] = useQuery<
+  const [{ data, error, fetching }, refreshStories] = useQuery<
     AllStoriesQuery,
     AllStoriesQueryVariables
   >({ query: STORIES_QUERY });
+  const [isRefreshing, setIsRefreshing] = React.useState(false);
 
-  if (fetching) {
+  const handleRefreshStories = React.useCallback(() => {
+    setIsRefreshing(true);
+    refreshStories({ requestPolicy: 'network-only' });
+  }, [refreshStories]);
+
+  React.useEffect(() => {
+    if (!fetching) {
+      setIsRefreshing(false);
+    }
+  }, [fetching]);
+
+  if (fetching && !isRefreshing) {
     return (
       <View style={styles.container}>
         <ActivityIndicator color="grey" />
@@ -48,6 +60,8 @@ export const HomeScreen: React.FC = () => {
 
   return (
     <FlatList
+      refreshing={isRefreshing}
+      onRefresh={handleRefreshStories}
       contentContainerStyle={styles.flatListContainer}
       style={styles.flatList}
       data={data?.stories}

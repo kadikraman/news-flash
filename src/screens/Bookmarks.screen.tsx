@@ -29,14 +29,27 @@ const BOOKMARKS_QUERY = gql`
 `;
 
 export const BookmarksScreen: React.FC = () => {
-  const [{ data, error, fetching }] = useQuery<
+  const [{ data, error, fetching }, refreshBookmarks] = useQuery<
     AllBookmarksQuery,
     AllBookmarksQueryVariables
   >({
     query: BOOKMARKS_QUERY,
   });
 
-  if (fetching) {
+  const [isRefreshing, setIsRefreshing] = React.useState(false);
+
+  const handleRefreshBookmarks = React.useCallback(() => {
+    setIsRefreshing(true);
+    refreshBookmarks({ requestPolicy: 'network-only' });
+  }, [refreshBookmarks]);
+
+  React.useEffect(() => {
+    if (!fetching) {
+      setIsRefreshing(false);
+    }
+  }, [fetching]);
+
+  if (fetching && !isRefreshing) {
     return (
       <View style={styles.container}>
         <ActivityIndicator color="grey" />
@@ -54,6 +67,8 @@ export const BookmarksScreen: React.FC = () => {
 
   return (
     <FlatList
+      refreshing={isRefreshing}
+      onRefresh={handleRefreshBookmarks}
       contentContainerStyle={styles.flatListContainer}
       style={styles.flatList}
       data={data?.bookmarks}

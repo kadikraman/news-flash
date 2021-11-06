@@ -5,5 +5,6 @@ export const StorySummaryFields = gql`
     id
     title
     summary
+    bookmarkId
   }
 `;

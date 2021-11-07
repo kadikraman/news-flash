@@ -18,6 +18,17 @@ import {
 } from './graphql/__generated__/operationTypes';
 import { BOOKMARKS_QUERY } from './screens/Bookmarks.screen';
 import { gql } from 'urql';
+import { useNetInfo } from '@react-native-community/netinfo';
+import { AppOfflinePage } from './components/AppOfflinePage';
+
+/**
+ * There are 3 levels of offline support:
+ *
+ * 0 - no support <-- everyone starts with this
+ * 1 - blocking notification <-- we will add this
+ * 2 - read-only offline support <-- we will add this
+ * 3 - read-write offline support <-- not needed for most apps
+ */
 
 const client = createClient({
   url:
@@ -94,6 +105,12 @@ const client = createClient({
 });
 
 export const App: React.FC = () => {
+  const { isConnected } = useNetInfo();
+
+  if (isConnected === false) {
+    return <AppOfflinePage />;
+  }
+
   return (
     <UrqlProvider value={client}>
       <NavigationContainer>

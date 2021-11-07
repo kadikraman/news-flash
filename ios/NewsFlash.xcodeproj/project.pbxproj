@@ -145,7 +145,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-NewsFlash-NewsFlashTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-NewsFlash-NewsFlashTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -485,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GN2D95JN55;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NewsFlash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GN2D95JN55;
 				INFOPLIST_FILE = NewsFlash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -54,6 +55,26 @@ export const Story: React.FC<{
     RemoveBookmarkMutationVariables
   >(REMOVE_BOOKMARK_MUTATION);
 
+  const handeAddBookmark = React.useCallback(async () => {
+    const result = await addBookmark({ storyId: item.id });
+    if (result.error && result.error.message.includes('You are offline!')) {
+      Alert.alert(
+        'You are offline!',
+        'Please connect to the internet to add this story to your bookmarks',
+      );
+    }
+  }, [addBookmark, item.id]);
+
+  const handleRemoveBookmark = React.useCallback(async () => {
+    const result = await removeBookmark({ bookmarkId: item.bookmarkId! });
+    if (result.error && result.error.message.includes('You are offline!')) {
+      Alert.alert(
+        'You are offline!',
+        'Please connect to the internet to remove this story from your bookmarks',
+      );
+    }
+  }, [item.bookmarkId, removeBookmark]);
+
   return (
     <Pressable
       onPress={() =>
@@ -67,13 +88,12 @@ export const Story: React.FC<{
           {item.title} {item.bookmarkId ? '🔖' : ''}
         </Text>
         {!item.bookmarkId && !isAddingBookmark && cta === 'add' ? (
-          <Pressable onPress={() => addBookmark({ storyId: item.id })}>
+          <Pressable onPress={handeAddBookmark}>
             <Text>Add Bookmark</Text>
           </Pressable>
         ) : null}
         {item.bookmarkId && !isRemovingBookmark && cta === 'remove' ? (
-          <Pressable
-            onPress={() => removeBookmark({ bookmarkId: item.bookmarkId! })}>
+          <Pressable onPress={handleRemoveBookmark}>
             <Text>Remove Bookmark</Text>
           </Pressable>
         ) : null}

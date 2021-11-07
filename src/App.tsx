@@ -8,7 +8,7 @@ import {
 import { Platform, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootNavigator } from './screens/Root.navigator';
-import { cacheExchange } from '@urql/exchange-graphcache';
+import { offlineExchange } from '@urql/exchange-graphcache';
 import schema from './graphql/graphql.schema.json';
 import {
   AddBookmarkMutation,
@@ -19,7 +19,10 @@ import {
 import { BOOKMARKS_QUERY } from './screens/Bookmarks.screen';
 import { gql } from 'urql';
 import { useNetInfo } from '@react-native-community/netinfo';
-import { AppOfflinePage } from './components/AppOfflinePage';
+// import { AppOfflinePage } from './components/AppOfflinePage';
+import { AppOfflineMessage } from './components/AppOfflineMessage';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { makeAsyncStorage } from '@urql/storage-rn';
 
 /**
  * There are 3 levels of offline support:
@@ -30,6 +33,12 @@ import { AppOfflinePage } from './components/AppOfflinePage';
  * 3 - read-write offline support <-- not needed for most apps
  */
 
+const storage = makeAsyncStorage({
+  dataKey: 'my-app-data',
+  metadataKey: 'my-app-metadata',
+  maxAge: 5,
+});
+
 const client = createClient({
   url:
     Platform.OS === 'android'
@@ -37,7 +46,8 @@ const client = createClient({
       : 'http://localhost:3000/graphql',
   exchanges: [
     dedupExchange,
-    cacheExchange({
+    offlineExchange({
+      storage,
       schema: schema as any,
       resolvers: {
         Query: {
@@ -107,16 +117,20 @@ const client = createClient({
 export const App: React.FC = () => {
   const { isConnected } = useNetInfo();
 
-  if (isConnected === false) {
-    return <AppOfflinePage />;
-  }
+  // Uncomment to show a full page offline message instead
+  // if (isConnected === false) {
+  //   return <AppOfflinePage />;
+  // }
 
   return (
-    <UrqlProvider value={client}>
-      <NavigationContainer>
-        <StatusBar hidden />
-        <RootNavigator />
-      </NavigationContainer>
-    </UrqlProvider>
+    <SafeAreaProvider>
+      <UrqlProvider value={client}>
+        <NavigationContainer>
+          <StatusBar hidden />
+          <RootNavigator />
+        </NavigationContainer>
+        {isConnected === false ? <AppOfflineMessage /> : null}
+      </UrqlProvider>
+    </SafeAreaProvider>
   );
 };

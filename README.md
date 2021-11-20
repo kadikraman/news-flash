@@ -46,7 +46,7 @@ Build the iOS app:
 ```sh
 yarn ios
 # or
-npn run ios
+npm run ios
 ```
 
 Build the Android app:
@@ -54,5 +54,5 @@ Build the Android app:
 ```sh
 yarn android
 # or
-npn run android
+npm run android
 ```

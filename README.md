@@ -24,7 +24,7 @@ Then install the JavaScript dependencies:
 ```sh
 yarn
 # or
-npn install
+npm install
 ```
 
 (iOS only) install the native dependencies:
